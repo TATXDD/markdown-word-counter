@@ -3,6 +3,8 @@ const sampleButton = document.querySelector("#sample-button");
 const clearButton = document.querySelector("#clear-button");
 const copyButton = document.querySelector("#copy-button");
 const copyFeedback = document.querySelector("#copy-feedback");
+const draftStatus = document.querySelector("#draft-status");
+const draftStorageKey = "markdown-word-counter-draft";
 
 const counters = {
   characters: document.querySelector("#character-count"),
@@ -42,6 +44,27 @@ function renderStats() {
   });
 }
 
+function saveDraft() {
+  try {
+    localStorage.setItem(draftStorageKey, input.value);
+    draftStatus.textContent = "草稿已保存在此浏览器中。";
+  } catch {
+    draftStatus.textContent = "浏览器未允许本地保存，关闭页面后内容可能无法恢复。";
+  }
+}
+
+function restoreDraft() {
+  try {
+    const savedDraft = localStorage.getItem(draftStorageKey);
+    if (savedDraft !== null) {
+      input.value = savedDraft;
+      draftStatus.textContent = "已恢复上次保存在此浏览器中的草稿。";
+    }
+  } catch {
+    draftStatus.textContent = "浏览器未允许本地保存，关闭页面后内容可能无法恢复。";
+  }
+}
+
 function formatStats(stats) {
   return [
     `总字符数：${stats.characters}`,
@@ -74,16 +97,26 @@ async function copyText(text) {
   }
 }
 
-input.addEventListener("input", renderStats);
+input.addEventListener("input", () => {
+  saveDraft();
+  renderStats();
+});
 
 sampleButton.addEventListener("click", () => {
   input.value = sampleText;
+  saveDraft();
   input.focus();
   renderStats();
 });
 
 clearButton.addEventListener("click", () => {
   input.value = "";
+  try {
+    localStorage.removeItem(draftStorageKey);
+    draftStatus.textContent = "草稿已清空。";
+  } catch {
+    draftStatus.textContent = "已清空当前输入，但浏览器未允许清除本地草稿。";
+  }
   input.focus();
   renderStats();
 });
@@ -97,4 +130,5 @@ copyButton.addEventListener("click", async () => {
   }
 });
 
+restoreDraft();
 renderStats();
