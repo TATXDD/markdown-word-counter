@@ -188,6 +188,23 @@ h1 {
   margin-bottom: 18px;
 }
 
+.editor-tools {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.button-copy {
+  border-color: #dedbff;
+  color: var(--accent-dark);
+  background: var(--accent-soft);
+}
+
+.button-copy:hover {
+  background: #e5e2ff;
+}
+
 h2 {
   margin-bottom: 6px;
   font-size: 1.15rem;
@@ -249,6 +266,13 @@ textarea:focus {
 .editor-note {
   margin: 12px 0 0;
   color: #8a93a5;
+  font-size: 0.75rem;
+}
+
+.copy-feedback {
+  min-height: 1.1em;
+  margin: 5px 0 0;
+  color: #3f8b64;
   font-size: 0.75rem;
 }
 
@@ -322,6 +346,11 @@ footer a:hover {
   .editor-heading {
     flex-direction: column;
     gap: 12px;
+  }
+
+  .editor-tools {
+    width: 100%;
+    justify-content: space-between;
   }
 
   textarea {

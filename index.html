@@ -63,7 +63,12 @@
             <h2 id="editor-title">输入 Markdown</h2>
             <p>支持标题、列表、代码块等任意 Markdown 文本。</p>
           </div>
-          <span class="status-dot"><span aria-hidden="true"></span>实时统计</span>
+          <div class="editor-tools">
+            <button class="button button-copy" id="copy-button" type="button">
+              复制统计
+            </button>
+            <span class="status-dot"><span aria-hidden="true"></span>实时统计</span>
+          </div>
         </div>
         <label class="sr-only" for="markdown-input">Markdown 内容</label>
         <textarea
@@ -75,6 +80,7 @@
 - 看看统计结果"
         ></textarea>
         <p class="editor-note">统计结果基于原始文本，不会删除 Markdown 标记。</p>
+        <p class="copy-feedback" id="copy-feedback" role="status" aria-live="polite"></p>
       </section>
 
       <footer>
