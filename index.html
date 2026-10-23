@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="一个简单、快速的 Markdown 字数统计器。"
+    />
+    <title>Markdown 字数统计器</title>
+    <link rel="stylesheet" href="./style.css" />
+    <script src="./script.js" defer></script>
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="hero" aria-labelledby="page-title">
+        <div>
+          <p class="eyebrow">TINY MARKDOWN TOOL</p>
+          <h1 id="page-title">Markdown 字数统计器</h1>
+          <p class="subtitle">粘贴内容后，实时查看字符、单词和行数。</p>
+        </div>
+        <div class="actions" aria-label="编辑操作">
+          <button class="button button-secondary" id="sample-button" type="button">
+            加载示例
+          </button>
+          <button class="button button-ghost" id="clear-button" type="button">
+            清空
+          </button>
+        </div>
+      </section>
+
+      <section class="stats-grid" aria-label="统计结果" aria-live="polite">
+        <article class="stat-card stat-card-accent">
+          <span class="stat-label">总字符数</span>
+          <strong class="stat-value" id="character-count">0</strong>
+          <span class="stat-hint">包含空格和换行</span>
+        </article>
+        <article class="stat-card">
+          <span class="stat-label">有效字符</span>
+          <strong class="stat-value" id="compact-count">0</strong>
+          <span class="stat-hint">不含空白字符</span>
+        </article>
+        <article class="stat-card">
+          <span class="stat-label">中文字符</span>
+          <strong class="stat-value" id="chinese-count">0</strong>
+          <span class="stat-hint">按汉字 Unicode 范围统计</span>
+        </article>
+        <article class="stat-card">
+          <span class="stat-label">英文单词</span>
+          <strong class="stat-value" id="word-count">0</strong>
+          <span class="stat-hint">按连续字母或数字统计</span>
+        </article>
+        <article class="stat-card">
+          <span class="stat-label">行数</span>
+          <strong class="stat-value" id="line-count">0</strong>
+          <span class="stat-hint">空内容按 0 行计算</span>
+        </article>
+      </section>
+
+      <section class="editor-card" aria-labelledby="editor-title">
+        <div class="editor-heading">
+          <div>
+            <h2 id="editor-title">输入 Markdown</h2>
+            <p>支持标题、列表、代码块等任意 Markdown 文本。</p>
+          </div>
+          <span class="status-dot"><span aria-hidden="true"></span>实时统计</span>
+        </div>
+        <label class="sr-only" for="markdown-input">Markdown 内容</label>
+        <textarea
+          id="markdown-input"
+          spellcheck="false"
+          placeholder="# 今天要做什么？
+
+- 写一点 Markdown
+- 看看统计结果"
+        ></textarea>
+        <p class="editor-note">统计结果基于原始文本，不会删除 Markdown 标记。</p>
+      </section>
+
+      <footer>
+        <span>零依赖 · 浏览器直接运行</span>
+        <span>内容仅在当前页面统计</span>
+      </footer>
+    </main>
+  </body>
+</html>
